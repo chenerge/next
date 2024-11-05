@@ -21,14 +21,10 @@ export default function StyledJsxRegistry({
   useServerInsertedHTML(() => {
     AppRegistry.registerComponent("Main", () => Main);
     const { getStyleElement } = AppRegistry.getApplication("Main");
-    console.log(getStyleElement());
+
     if (!isServerInserted.current) {
       isServerInserted.current = true;
-      const styles = [
-        getStyleElement(),
-        jsxStyleRegistry.styles(),
-        flush(),
-      ];
+      const styles = [getStyleElement(), jsxStyleRegistry.styles(), flush()];
       jsxStyleRegistry.flush();
       return <>{styles}</>;
     }
